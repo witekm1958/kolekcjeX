@@ -15,7 +15,8 @@ import javax.validation.Valid;
 
 
 @Controller
-@RequestMapping("register")
+//@RequestMapping("register")
+@RequestMapping("profile")
 public class ProfileController {
 
     private final ProfileRepository profileRepository;
@@ -51,7 +52,6 @@ public class ProfileController {
 
         return "redirect:/home";
     }
-
 
 
 }
