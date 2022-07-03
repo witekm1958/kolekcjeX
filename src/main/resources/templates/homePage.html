@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="~{layout :: template(~{:: .uk-section})}">
+<head>
+
+</head>
+<body>
+
+<div class="uk-section">
+    <div class="uk-container uk-container-small">
+        <div class="uk-cover-container uk-height-large">
+            <img th:src="@{/img/home1.png}" alt="">
+        </div>
+        <article class="uk-article uk-margin-large uk-text-center">
+            <h1 class="uk-article-title">Kolekcja militariów</h1>
+            <p>Pomimo kataklizmu drugiej wojny światowej, z pożogi wojennej ocalała pewna liczba szabel które niegdyś
+                służyły polskiemu żołnierzowi. Są one dokumentem epoki jako produkt polskiego przemysłu lub rzemiosła i
+                jako rodzaj oręża. Są też szczególnie emocjonalną pamiątką walk o niepodległość. Szczególnym sentymentem
+                darzymy broń z okresu napoleońskiego i zrywów narodowościowych w XIX wieku. Zadziwia różnorodność
+                rodzajów i typów broni białej spotykanej na obszarze naszego kraju. Polska rozdarta zaborami nie miała
+                własnego przemysłu zbrojeniowego. Walka o niepodległość rządziła się swoimi, twardymi prawami. Zanim
+                krajowi wytwórcy rozpoczęli produkcję szabel dla odrodzonej po latach zaborów armii, żołnierz polski
+                musiał z konieczności używać broni obcej. Polskie formacje wojskowe walczące o niepodległość w okresie I
+                wojny Światowej wyposażone były w szable produkcji państw u których boku działały. Również po odzyskaniu
+                niepodległości broń obca pozostała elementem wyposażenia polskiego wojska ze względu na trudności
+                związane z rozwojem rodzimego przemysłu zbrojeniowego. Tak więc szable obcej produkcji stały się w
+                polskich rękach polskim orężem. Wobec braku nowoczesnych zakładów zbrojeniowych produkcje szabel
+                podejmowały prywatne zakłady wyrobów metalowych, nie mające odpowiednich tradycji i przygotowania w tej
+                dziedzinie. Zwłaszcza te ostatnie stanowią dziś dużą atrakcję kolekcjonerską. Ze względu na swoją
+                prostotę i niedoskonałość zachowało się ich bardzo niewiele. Warto ocalić to od zapomnienia.</p>
+            <a class="uk-button uk-button-primary uk-margin-large" th:href="@{/register}">Utwórz konto</a>
+        </article>
+        <div class="uk-cover-container uk-height-max-large uk-margin-bottom">
+            <img th:src="@{/img/home2.png}" alt="">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
