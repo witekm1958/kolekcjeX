@@ -27,31 +27,31 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    @GetMapping("profile/{profileId}")
-    public String showRegisterProfilePage(
-            @PathVariable Long profileId,
-            @ModelAttribute("profile") ProfileModel profileModel,
-            Model model) {
-        ProfileEntity profileEntity = profileRepository.findById(profileId).orElseThrow(EntityExistsException::new);
-        model.addAttribute("profile", profileEntity);
-        return "profilePage";
-    }
-
-    @PostMapping("profile{profileId}")
-    public String processSaveProfile(
-            @PathVariable Long profileId,
-            @ModelAttribute("profile") @Valid ProfileModel profileModel,
-            BindingResult bindingResult,
-            Model model) {
-        if (bindingResult.hasErrors()) {
-            ProfileEntity profileEntity = profileRepository.findById(profileId).orElseThrow(EntityNotFoundException::new);
-            model.addAttribute("profile", profileEntity);
-            return "profilePage";
-        }
-        profileService.saveProfile(profileId, profileModel);
-
-        return "redirect:/home";
-    }
+//    @GetMapping("profile/{profileId}")
+//    public String showRegisterProfilePage(
+//            @PathVariable Long profileId,
+//            @ModelAttribute("profile") ProfileModel profileModel,
+//            Model model) {
+//        ProfileEntity profileEntity = profileRepository.findById(profileId).orElseThrow(EntityExistsException::new);
+//        model.addAttribute("profile", profileEntity);
+//        return "profilePage";
+//    }
+//
+//    @PostMapping("profile{profileId}")
+//    public String processSaveProfile(
+//            @PathVariable Long profileId,
+//            @ModelAttribute("profile") @Valid ProfileModel profileModel,
+//            BindingResult bindingResult,
+//            Model model) {
+//        if (bindingResult.hasErrors()) {
+//            ProfileEntity profileEntity = profileRepository.findById(profileId).orElseThrow(EntityNotFoundException::new);
+//            model.addAttribute("profile", profileEntity);
+//            return "profilePage";
+//        }
+//        profileService.saveProfile(profileId, profileModel);
+//
+//        return "redirect:/home";
+//    }
 
 
 }

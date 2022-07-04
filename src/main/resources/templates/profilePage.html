@@ -13,21 +13,21 @@
             <p><span></span></p>
             <p></p>
         </div>
-        <form class="uk-grid-small uk-margin" uk-grid method="post">
+        <form class="uk-grid-small uk-margin" uk-grid method="post" metod="POST" th:href="@{/register}" th:object="${profile}">
             <div class="uk-width-1-2">
-                <input class="uk-input" type="text"  placeholder="Profil użytkownika">
+                <input class="uk-input" type="text"  placeholder="Profil użytkownika" th:field="*{userName}">
             </div>
             <div class="uk-width-1-2">
-                <input class="uk-input" type="text" placeholder="Login">
+                <input class="uk-input" type="text" placeholder="Login" th:field="*{loginName}">
             </div>
             <div class="uk-width-1-2">
-                <input class="uk-input" type="text" placeholder="Hasło">
+                <input class="uk-input" type="password" placeholder="Hasło" th:field="*{password}">
             </div>
             <div class="uk-width-1-2">
-                <input class="uk-input" type="text" placeholder="Powtórz hasło">
+                <input class="uk-input" type="password" placeholder="Powtórz hasło">
             </div>
             <div class="uk-width-1-2">
-                <input class="uk-input" type="text" placeholder="Adres email">
+                <input class="uk-input" type="text" placeholder="Adres email" th:field="*{addressEmail}">
             </div>
             <div class="uk-width-1-1">
                 <input type="submit" class="uk-button uk-button-primary uk-width-1-1" value="Rejestracja">
