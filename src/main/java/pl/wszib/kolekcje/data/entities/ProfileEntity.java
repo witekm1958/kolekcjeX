@@ -4,6 +4,7 @@ import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -30,7 +31,7 @@ public class ProfileEntity {
     @Column(name = "address_email")
     private String addressEmail;
     @Column(name = "date_registration")
-    private String dateOfRegistration;
+    private Date dateOfRegistration;
 //    @NotNull
     @NonNull
     @Column(name = "status")
@@ -42,7 +43,7 @@ public class ProfileEntity {
     public ProfileEntity() {
     }
 
-    public ProfileEntity(String userName, String password, String loginName, String addressEmail, String dateOfRegistration, String status) {
+    public ProfileEntity(String userName, String password, String loginName, String addressEmail, Date dateOfRegistration, String status) {
         this.userName = userName;
         this.password = password;
         this.loginName = loginName;
@@ -83,11 +84,11 @@ public class ProfileEntity {
         this.addressEmail = addressEmail;
     }
 
-    public String getDateOfRegistration() {
+    public Date getDateOfRegistration() {
         return dateOfRegistration;
     }
 
-    public void setDateOfRegistration(String dateOfRegistration) {
+    public void setDateOfRegistration(Date dateOfRegistration) {
         this.dateOfRegistration = dateOfRegistration;
     }
 

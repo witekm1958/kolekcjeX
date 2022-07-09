@@ -19,11 +19,9 @@ import javax.validation.Valid;
 @Controller
 public class HomeController {
 
-    private final ProfileRepository profileRepository;
     private final ProfileService profileService;
 
-    public HomeController(ProfileRepository profileRepository, ProfileService profileService) {
-        this.profileRepository = profileRepository;
+    public HomeController(ProfileService profileService) {
         this.profileService = profileService;
     }
 
@@ -44,7 +42,12 @@ public class HomeController {
     public String saveUserProfile(
             @ModelAttribute("profile") @Valid ProfileModel profileModel,
             Model model) {
-        return "profilePage";
+
+        profileService.saveProfile(profileModel);
+
+        // zamiat do strony "profilePage" to wstawić informację o potwierdzeniu logowania.
+        //return "profilePage";
+        return "registerConfirmationPage";
     }
 
 //    @GetMapping("profile/{profileId}")
@@ -72,4 +75,11 @@ public class HomeController {
 //
 //        return "redirect:/home";
 //    }
+
+    @GetMapping("login")
+    public String showUserLoginPage(
+            @ModelAttribute("login") ProfileModel profileModel,
+            Model model) {
+        return "loginPage";
+    }
 }
