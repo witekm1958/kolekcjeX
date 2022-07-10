@@ -1,14 +1,24 @@
 package pl.wszib.kolekcje.web.models;
 
+//import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+
 public class ProfileModel {
+    @NotNull
+    @Size(min = 5, max = 15)
     private String userName;
+    @NotNull
+    @Size(min = 5, max = 15)
     private String loginName;
+    @NotNull
+    @Size(min = 5, max = 30)
     private String password;
+    @NotNull
     private String addressEmail;
     private String dateOfRegistration;
     private String status;
 
-     public String getUserName() {
+    public String getUserName() {
         return userName;
     }
 

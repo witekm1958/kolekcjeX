@@ -15,13 +15,24 @@ import pl.wszib.kolekcje.web.models.ProfileModel;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class HomeController {
 
+    // dodałem ProfileRepository
+    private final ProfileRepository profileRepository;
     private final ProfileService profileService;
 
-    public HomeController(ProfileService profileService) {
+    // komentuję ten kontroler
+//    public HomeController(ProfileService profileService) {
+//        this.profileService = profileService;
+//    }
+
+    // dodałem HomeController
+    public HomeController(ProfileRepository profileRepository, ProfileService profileService) {
+        this.profileRepository = profileRepository;
         this.profileService = profileService;
     }
 
@@ -38,27 +49,46 @@ public class HomeController {
         return "profilePage";
     }
 
+    @GetMapping("profile/{profileId}")
+    public String showRegisterProfilePage(
+            @PathVariable Long profileId,
+            @ModelAttribute("profile") ProfileModel profileModel,
+            Model model) {
+        ProfileEntity profileEntity = profileRepository.findById(profileId).orElseThrow(EntityExistsException::new);
+        model.addAttribute("profile", profileEntity);
+        return "profilePage";
+    }
+
     @PostMapping("register")
     public String saveUserProfile(
             @ModelAttribute("profile") @Valid ProfileModel profileModel,
+            BindingResult bindingResult,
             Model model) {
 
+        // dopisałem stąd *************************************************
+        // walidacja profilu
+        Optional<ProfileEntity> userFromDb = profileRepository.findByUserName(profileModel.getUserName());
+        if (!userFromDb.isEmpty()) {
+            return "profilePage";
+        }
+
+        // walidacja loginu
+        Optional<ProfileEntity> loginFromDb = profileRepository.findByLoginName(profileModel.getLoginName());
+        if (!loginFromDb.isEmpty()) {
+            return "profilePage";
+        }
+        // dotąd **********************************************************
+
+        if (bindingResult.hasErrors()) {
+
+            return "profilePage";
+        }
         profileService.saveProfile(profileModel);
 
-        // zamiat do strony "profilePage" to wstawić informację o potwierdzeniu logowania.
-        //return "profilePage";
         return "registerConfirmationPage";
     }
 
-//    @GetMapping("profile/{profileId}")
-//    public String showRegisterProfilePage(
-//            @PathVariable Long profileId,
-//            @ModelAttribute("profile") ProfileModel profileModel,
-//            Model model) {
-//        ProfileEntity profileEntity = profileRepository.findById(profileId).orElseThrow(EntityExistsException::new);
-//        model.addAttribute("profile", profileEntity);
-//        return "profilePage";
-//    }
+
 
 //    @PostMapping("profile{profileId}")
 //    public String processSaveProfile(

@@ -15,13 +15,25 @@
         </div>
         <form class="uk-grid-small uk-margin" uk-grid method="post" metod="POST" th:href="@{/register}" th:object="${profile}">
             <div class="uk-width-1-2">
-                <input class="uk-input" type="text"  placeholder="Profil użytkownika" th:field="*{userName}">
+                <input class="uk-input" type="text"  placeholder="Profil użytkownika" th:field="*{userName}"
+                       th:errorclass="uk-form-danger">
+                <span th:if="${#fields.hasErrors('userName')}" class="uk-text-small uk-text-danger">
+                    Profil powinien mieć długość od 5 do 15 znaków
+                </span>
             </div>
             <div class="uk-width-1-2">
-                <input class="uk-input" type="text" placeholder="Login" th:field="*{loginName}">
+                <input class="uk-input" type="text" placeholder="Login" th:field="*{loginName}"
+                       th:errorclass="uk-form-danger">
+                <span th:if="${#fields.hasErrors('loginName')}" class="uk-text-small uk-text-danger">
+                    Login powinien mieć długość od 5 do 15 znaków
+                </span>
             </div>
             <div class="uk-width-1-2">
-                <input class="uk-input" type="password" placeholder="Hasło" th:field="*{password}">
+                <input class="uk-input" type="password" placeholder="Hasło" th:field="*{password}"
+                        th:errorclass="uk-form-danger">
+                <span th:if="${#fields.hasErrors('password')}" class="uk-text-small uk-text-danger">
+                    Hasło powinno mieć długość od 5 do 30 znaków
+                </span>
             </div>
             <div class="uk-width-1-2">
                 <input class="uk-input" type="password" placeholder="Powtórz hasło">

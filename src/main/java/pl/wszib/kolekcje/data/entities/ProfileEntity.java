@@ -3,6 +3,8 @@ package pl.wszib.kolekcje.data.entities;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -14,25 +16,27 @@ public class ProfileEntity {
     @GeneratedValue
     @Column(name = "id_user")
     private Long idUser;
-//    @NotNull
+
     @NonNull
     @Column(name = "user_name")
     private String userName;
-//    @NotNull
+
     @NonNull
     @Column(name = "login_name")
     private String loginName;
-//    @NotNull
+
     @NotNull
     @Column(name = "password")
     private String password;
-//    @NotNull
+
     @NonNull
+    @NotEmpty
+//    @Email
     @Column(name = "address_email")
     private String addressEmail;
     @Column(name = "date_registration")
     private Date dateOfRegistration;
-//    @NotNull
+
     @NonNull
     @Column(name = "status")
     private String status;
