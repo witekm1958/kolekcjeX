@@ -1,5 +1,7 @@
 package pl.wszib.kolekcje.web.controllers;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.wszib.kolekcje.data.entities.ProfileEntity;
 import pl.wszib.kolekcje.data.repositories.ProfileRepository;
 import pl.wszib.kolekcje.services.ProfileService;
@@ -20,6 +23,9 @@ import java.util.Optional;
 
 @Controller
 public class HomeController {
+
+    boolean profileEexists = false;
+    boolean loginEexists = false;
 
     // dodałem ProfileRepository
     private final ProfileRepository profileRepository;
@@ -63,12 +69,17 @@ public class HomeController {
     public String saveUserProfile(
             @ModelAttribute("profile") @Valid ProfileModel profileModel,
             BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
             Model model) {
 
         // dopisałem stąd *************************************************
         // walidacja profilu
         Optional<ProfileEntity> userFromDb = profileRepository.findByUserName(profileModel.getUserName());
+        //profileEexists = false;
         if (!userFromDb.isEmpty()) {
+            //boolean profileEexists = true;
+            redirectAttributes.addFlashAttribute("error", "Taki Profil już istnieje");
+
             return "profilePage";
         }
 

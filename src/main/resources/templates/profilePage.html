@@ -20,6 +20,10 @@
                 <span th:if="${#fields.hasErrors('userName')}" class="uk-text-small uk-text-danger">
                     Profil powinien mieć długość od 5 do 15 znaków
                 </span>
+<!--                <span th:if="${#fields.hasErrors()}" class="uk-text-small uk-text-danger">-->
+<!--                    Taki Profil już istnieje-->
+<!--                </span>-->
+                    <span class="card-title" th:if="${error}" text="${error}"></span>
             </div>
             <div class="uk-width-1-2">
                 <input class="uk-input" type="text" placeholder="Login" th:field="*{loginName}"
@@ -27,6 +31,9 @@
                 <span th:if="${#fields.hasErrors('loginName')}" class="uk-text-small uk-text-danger">
                     Login powinien mieć długość od 5 do 15 znaków
                 </span>
+<!--                <span th:if="${#fields.hasErrors('loginName')}" class="uk-text-small uk-text-danger">-->
+<!--                    Taki Login już istnieje-->
+<!--                </span>-->
             </div>
             <div class="uk-width-1-2">
                 <input class="uk-input" type="password" placeholder="Hasło" th:field="*{password}"

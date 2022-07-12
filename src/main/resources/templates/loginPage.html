@@ -8,6 +8,10 @@
 <div class="uk-section">
     <div class="uk-container uk-container-small">
         <h2 class="uk-heading-bullet">Logowanie</h2>
+        <div id="errorMessage" class="card-panel red lighten-2"
+             th:if="${param.error}">
+            <span class="card-title">Błędna nazwa lub hasło</span>
+        </div>
         <form class="uk-grid-small uk-margin" uk-grid method="post" metod="POST" th:href="@{/register}" th:object="${profile}">
             <div class="uk-width-1-3">
                 <input class="uk-input" type="text" placeholder="Login">
