@@ -13,27 +13,23 @@
             <p><span></span></p>
             <p></p>
         </div>
-        <form class="uk-grid-small uk-margin" uk-grid method="post" metod="POST" th:href="@{/register}" th:object="${profile}">
+
+        <form class="uk-grid-small uk-margin" uk-grid method="post" metod="POST" th:href="@{/register}" th:object="${userModel}">
             <div class="uk-width-1-2">
-                <input class="uk-input" type="text"  placeholder="Profil użytkownika" th:field="*{userName}"
+                <input class="uk-input" type="text"  placeholder="Profil użytkownika" th:field="*{userProfile}"
                        th:errorclass="uk-form-danger">
-                <span th:if="${#fields.hasErrors('userName')}" class="uk-text-small uk-text-danger">
+                <span th:if="${#fields.hasErrors('userProfile')}" class="uk-text-small uk-text-danger">
                     Profil powinien mieć długość od 5 do 15 znaków
                 </span>
-<!--                <span th:if="${#fields.hasErrors()}" class="uk-text-small uk-text-danger">-->
-<!--                    Taki Profil już istnieje-->
-<!--                </span>-->
-                    <span class="card-title" th:if="${error}" text="${error}"></span>
+                <span class="uk-text-small uk-text-danger" th:text="${errorProfile}"></span>
             </div>
             <div class="uk-width-1-2">
-                <input class="uk-input" type="text" placeholder="Login" th:field="*{loginName}"
+                <input class="uk-input" type="text" placeholder="Login" th:field="*{username}"
                        th:errorclass="uk-form-danger">
-                <span th:if="${#fields.hasErrors('loginName')}" class="uk-text-small uk-text-danger">
+                <span th:if="${#fields.hasErrors('username')}" class="uk-text-small uk-text-danger">
                     Login powinien mieć długość od 5 do 15 znaków
                 </span>
-<!--                <span th:if="${#fields.hasErrors('loginName')}" class="uk-text-small uk-text-danger">-->
-<!--                    Taki Login już istnieje-->
-<!--                </span>-->
+                <span class="uk-text-small uk-text-danger" th:text="${errorLogin}"></span>
             </div>
             <div class="uk-width-1-2">
                 <input class="uk-input" type="password" placeholder="Hasło" th:field="*{password}"
@@ -43,10 +39,16 @@
                 </span>
             </div>
             <div class="uk-width-1-2">
-                <input class="uk-input" type="password" placeholder="Powtórz hasło">
+                <input class="uk-input" type="password" placeholder="Powtórz hasło" th:field="*{rePassword}"
+                       th:errorclass="uk-form-danger">
+                <span class="uk-text-small uk-text-danger" th:text="${errorPassword}"></span>
             </div>
             <div class="uk-width-1-2">
-                <input class="uk-input" type="text" placeholder="Adres email" th:field="*{addressEmail}">
+                <input class="uk-input" type="text" placeholder="Adres email" th:field="*{addressEmail}"
+                       th:errorclass="uk-form-danger">
+                <span th:if="${#fields.hasErrors('addressEmail')}" class="uk-text-small uk-text-danger">
+                    Wprowadź poprawny adres email
+                </span>
             </div>
             <div class="uk-width-1-1">
                 <input type="submit" class="uk-button uk-button-primary uk-width-1-1" value="Rejestracja">

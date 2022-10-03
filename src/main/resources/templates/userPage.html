@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="https://www.thymeleaf.org" th:replace="~{layout :: template(~{:: .uk-section})}">
+<!--<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" th:replace="~{layout :: template(~{:: .uk-section})}">-->
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>Panel Użytkownika</h1>
+<div class="uk-section">
+    <div class="uk-container uk-container-small">
+        <h2 class="uk-heading-bullet">Warsztat użytkownika</h2>
+<!--        <div class="uk-card uk-card-default uk-card-small uk-card-body">-->
+<!--            <h3 class="uk-card-title" th:text="${}"></h3>-->
+<!--            <p th:text="${}"></p>-->
+<!--        </div>-->
+        <div class="uk-card uk-card-default uk-card-small uk-card-body">
+            <h3 class="uk-card-title" th:text="${userName}"></h3>
+<!--            <p><span th:each="ingredient,stat : ${pizza.ingredients}"-->
+<!--                     th:text="${ingredient.name} + ${stat.last ? '' : ', '}"></span></p>-->
+<!--            <p th:text="|${pizza.price}zł|"></p>-->
+        </div>
+    </div>
+</div>
+</body>
+</html>

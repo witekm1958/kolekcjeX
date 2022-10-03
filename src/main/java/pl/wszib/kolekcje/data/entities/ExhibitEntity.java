@@ -22,7 +22,7 @@ public class ExhibitEntity {
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "id_user")
-    private ProfileEntity profileEntity;
+    private User user;
 
     public ExhibitEntity() {
     }
@@ -76,12 +76,12 @@ public class ExhibitEntity {
         this.typeOfWeapon = typeOfWeapon;
     }
 
-    public ProfileEntity getUser() {
-        return profileEntity;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser(ProfileEntity profileEntity) {
-        this.profileEntity = profileEntity;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

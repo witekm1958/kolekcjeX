@@ -1,24 +1,19 @@
 package pl.wszib.kolekcje.web.controllers;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.wszib.kolekcje.data.entities.ProfileEntity;
-import pl.wszib.kolekcje.data.repositories.ProfileRepository;
-import pl.wszib.kolekcje.services.ProfileService;
-import pl.wszib.kolekcje.web.models.ProfileModel;
+import pl.wszib.kolekcje.data.entities.User;
+import pl.wszib.kolekcje.data.repositories.RoleRepository;
+import pl.wszib.kolekcje.data.repositories.UserRepository;
+import pl.wszib.kolekcje.services.UserService;
+import pl.wszib.kolekcje.web.models.UserModel;
 
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -27,19 +22,20 @@ public class HomeController {
     boolean profileEexists = false;
     boolean loginEexists = false;
 
-    // dodałem ProfileRepository
-    private final ProfileRepository profileRepository;
-    private final ProfileService profileService;
+    private final UserRepository userRepository;
 
-    // komentuję ten kontroler
-//    public HomeController(ProfileService profileService) {
-//        this.profileService = profileService;
-//    }
+    private final UserService userService;
 
-    // dodałem HomeController
-    public HomeController(ProfileRepository profileRepository, ProfileService profileService) {
-        this.profileRepository = profileRepository;
-        this.profileService = profileService;
+    private final RoleRepository roleRepository;
+
+    private static final String THIS_PROFILE_ALREADY_EXISTS = "Taki Profil już istnieje";
+    private static final String THIS_LOGIN_ALREADY_EXISTS = "Taki Login już istnieje";
+    private static final String PASSWORDS_VARY = "Hasła są różne";
+
+    public HomeController(UserRepository userRepository, UserService userService, RoleRepository roleRepository) {
+        this.userRepository = userRepository;
+        this.userService = userService;
+        this.roleRepository = roleRepository;
     }
 
     @GetMapping
@@ -50,76 +46,52 @@ public class HomeController {
 
     @GetMapping("register")
     public String showUserRegisterPage(
-            @ModelAttribute("profile") ProfileModel profileModel,
+            @ModelAttribute("userModel") UserModel userModel,
             Model model) {
-        return "profilePage";
-    }
-
-    @GetMapping("profile/{profileId}")
-    public String showRegisterProfilePage(
-            @PathVariable Long profileId,
-            @ModelAttribute("profile") ProfileModel profileModel,
-            Model model) {
-        ProfileEntity profileEntity = profileRepository.findById(profileId).orElseThrow(EntityExistsException::new);
-        model.addAttribute("profile", profileEntity);
-        return "profilePage";
+        return "userRegisterPage";
     }
 
     @PostMapping("register")
     public String saveUserProfile(
-            @ModelAttribute("profile") @Valid ProfileModel profileModel,
+            @ModelAttribute("userModel") @Valid UserModel userModel,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
             Model model) {
 
-        // dopisałem stąd *************************************************
-        // walidacja profilu
-        Optional<ProfileEntity> userFromDb = profileRepository.findByUserName(profileModel.getUserName());
-        //profileEexists = false;
+        Optional<User> userFromDb = userRepository.findByUserProfile(userModel.getUserProfile());
         if (!userFromDb.isEmpty()) {
-            //boolean profileEexists = true;
-            redirectAttributes.addFlashAttribute("error", "Taki Profil już istnieje");
-
-            return "profilePage";
+            redirectAttributes.addFlashAttribute("error", THIS_PROFILE_ALREADY_EXISTS);
+            model.addAttribute("errorProfile", THIS_PROFILE_ALREADY_EXISTS);
+            return "userRegisterPage";
         }
 
-        // walidacja loginu
-        Optional<ProfileEntity> loginFromDb = profileRepository.findByLoginName(profileModel.getLoginName());
+        Optional<User> loginFromDb = userRepository.findByUsername(userModel.getUsername());
         if (!loginFromDb.isEmpty()) {
-            return "profilePage";
+            model.addAttribute("errorLogin", THIS_LOGIN_ALREADY_EXISTS);
+            return "userRegisterPage";
         }
-        // dotąd **********************************************************
+
+        if (!userModel.isItTheSamePassword() ) {
+            model.addAttribute("errorPassword", PASSWORDS_VARY);
+            return "userRegisterPage";
+        }
 
         if (bindingResult.hasErrors()) {
-
-            return "profilePage";
+            return "userRegisterPage";
         }
-        profileService.saveProfile(profileModel);
+
+//        Optional<Role> roleOptional = roleRepository.findByName("USER");
+//        if (roleOptional.isPresent()) {
+//            userModel.getRoles().add(roleOptional.get());
+//        }
+        userService.saveProfile(userModel);
 
         return "registerConfirmationPage";
     }
 
-
-
-//    @PostMapping("profile{profileId}")
-//    public String processSaveProfile(
-//            @PathVariable Long profileId,
-//            @ModelAttribute("profile") @Valid ProfileModel profileModel,
-//            BindingResult bindingResult,
-//            Model model) {
-//        if (bindingResult.hasErrors()) {
-//            ProfileEntity profileEntity = profileRepository.findById(profileId).orElseThrow(EntityNotFoundException::new);
-//            model.addAttribute("profile", profileEntity);
-//            return "profilePage";
-//        }
-//        profileService.saveProfile(profileId, profileModel);
-//
-//        return "redirect:/home";
-//    }
-
     @GetMapping("login")
     public String showUserLoginPage(
-            @ModelAttribute("login") ProfileModel profileModel,
+            @ModelAttribute("login") UserModel userModel,
             Model model) {
         return "loginPage";
     }
