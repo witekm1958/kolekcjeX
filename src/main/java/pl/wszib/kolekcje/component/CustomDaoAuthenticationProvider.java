@@ -47,7 +47,7 @@ public class CustomDaoAuthenticationProvider implements AuthenticationProvider {
         }
 
         UsernamePasswordAuthenticationToken token =
-        new UsernamePasswordAuthenticationToken(name, password, userDetails.getAuthorities());
+                new UsernamePasswordAuthenticationToken(name, password, userDetails.getAuthorities());
         return token;
     }
 

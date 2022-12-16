@@ -33,7 +33,7 @@
             </div>
             <div class="uk-width-1-2">
                 <input class="uk-input" type="password" placeholder="Hasło" th:field="*{password}"
-                        th:errorclass="uk-form-danger">
+                       th:errorclass="uk-form-danger">
                 <span th:if="${#fields.hasErrors('password')}" class="uk-text-small uk-text-danger">
                     Hasło powinno mieć długość od 5 do 30 znaków
                 </span>

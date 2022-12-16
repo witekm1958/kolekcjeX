@@ -13,6 +13,7 @@ import pl.wszib.kolekcje.data.repositories.UserRepository;
 import pl.wszib.kolekcje.services.UserService;
 import pl.wszib.kolekcje.web.models.UserModel;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Optional;
 
@@ -40,7 +41,7 @@ public class HomeController {
 
     @GetMapping
     public String showHomePage(Model model) {
-        model.addAttribute("name", "Jan");
+//        model.addAttribute("name", "Jan");
         return "homePage";
     }
 
@@ -80,10 +81,6 @@ public class HomeController {
             return "userRegisterPage";
         }
 
-//        Optional<Role> roleOptional = roleRepository.findByName("USER");
-//        if (roleOptional.isPresent()) {
-//            userModel.getRoles().add(roleOptional.get());
-//        }
         userService.saveProfile(userModel);
 
         return "registerConfirmationPage";
@@ -95,4 +92,29 @@ public class HomeController {
             Model model) {
         return "loginPage";
     }
+
+    @GetMapping("/user_panel")
+    public String showUserPage(Model model, HttpServletRequest request) {
+        model.addAttribute("userName", request.getRemoteUser());
+        return "userPage";
+    }
+
+    @GetMapping("/admin_panel")
+    public String showAdminPage(Model model, HttpServletRequest request) {
+        model.addAttribute("userName", request.getRemoteUser());
+        return "adminPage";
+    }
+
+    @GetMapping("/logged")
+    public String showPageAfterUserLogin(Model model, HttpServletRequest request) {
+        model.addAttribute("userName", request.getRemoteUser());
+        return "homePageAfterLoggingIn";
+    }
+
+    @GetMapping("/permanent_exhibition")
+    String showPermanentExhibition(Model map) {
+        return "permanentExhibition";
+    }
+
+
 }
