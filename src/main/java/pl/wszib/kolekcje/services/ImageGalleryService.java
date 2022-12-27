@@ -25,6 +25,7 @@ public class ImageGalleryService {
 
     @Transactional
     public void saveImage(ImageGalleryModel imageGalleryModel) {
+
         ImageGallery imageGallery = ImageGalleryMapper.toEntity(imageGalleryModel);
         imageGallery.setCreateDate(date);
 

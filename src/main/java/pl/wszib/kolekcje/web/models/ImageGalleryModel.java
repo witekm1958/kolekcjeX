@@ -12,7 +12,7 @@ public class ImageGalleryModel {
     @NotEmpty
     @Min(0)
     private double price;
-    @NotEmpty
+//    @NotEmpty
     private byte[] image;
 
     public String getName() {
