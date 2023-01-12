@@ -19,7 +19,7 @@ public class ImageGalleryMapper {
         ImageGallery entity = new ImageGallery();
         entity.setName(model.getName());
         entity.setDescription(model.getDescription());
-        entity.setImage(model.getImage());
+        entity.setImage(model.getZdjecie());
         entity.setPrice(model.getPrice());
         return entity;
     }

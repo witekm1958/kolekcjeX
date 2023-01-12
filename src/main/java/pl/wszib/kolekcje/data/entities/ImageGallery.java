@@ -22,7 +22,7 @@ public class ImageGallery {
     private double price;
 
     @Lob
-    @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
+    @Column(name = "image", length = Integer.MAX_VALUE, nullable = true)
     private byte[] image;
 
     @Temporal(TemporalType.TIMESTAMP)

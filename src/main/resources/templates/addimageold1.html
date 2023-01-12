@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="~{layoutAfterLoggingIn :: template(~{:: .uk-section})}">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{layoutAfterLoggingIn :: template(~{:: .uk-section})}">
 <head>
     <title>Kolekcje militariów</title>
     <meta charset="UTF-8">
 </head>
-<!--<body>-->
-<body onload="document.getElementById('form1').focus()">
+<body>
 <div class="uk-section">
     <div class="uk-container uk-container-small">
         <h2 class="uk-heading-bullet">Kolekcja militariów - uzupełnianie zdjęć</h2><br><br>
-        <form th:method="POST" th:action="@{/add_image}" th:object="${imageGalleryModel}"
+        <form th:method="POST" th:action="@{/image/saveImageDetails}" th:object="${imageGalleryModel}"
               enctype="multipart/form-data">
             <table class="uk-table">
                 <tr>
                  <td>
                    <div>
                       <label class="uk-text-bold">Nazwa</label>
-                      <input id="form1" class="uk-input" type="text" placeholder="Podaj nazwę" th:field="*{name}"
+                      <input class="uk-input" type="text" placeholder="Podaj nazwę" th:field="*{name}"
                              th:errorclass="uk-form-danger">
                       <span th:if="${#fields.hasErrors('name')}" class="uk-text-small uk-text-danger">
-                          Nazwa nie może być pusta!
-                      </span>
-                   </div>
+                Nazwa nie może być pusta!
+            </span>
+                  </div>
                   </td>
                     <td>
                       <div>
@@ -29,10 +29,10 @@
                          <textarea class="uk-input" type="text" placeholder="Opis artefaktu:"
                                       th:field="*{description}"
                                       th:errorclass="uk-form-danger">
-                         </textarea>
-                         <span th:if="${#fields.hasErrors('description')}" class="uk-text-small uk-text-danger">
-                             Artefakt musi być opisany!
-                         </span>
+            </textarea>
+                      <span th:if="${#fields.hasErrors('description')}" class="uk-text-small uk-text-danger">
+                Artefakt musi być opisany!
+            </span>
                      </div>
                     </td>
                 </tr>
@@ -42,18 +42,20 @@
                          <label class="uk-text-bold">Wybierz zdjęcie:</label>
                          <input id="zdjecie" class="uk-input" type="file" name="image"
                                    accept="image/png, image/jpg, image/jpeg">
-                          <span th:if="${#fields.hasErrors('zdjecie')}" th:errors="*{zdjecie}" class="uk-text-small uk-text-danger"></span>
+                         <span th:if="${#fields.hasErrors('zdjecie')}" class="uk-text-small uk-text-danger">
+               Zdjecie jest wymagane!
+           </span>
                       </div>
                     </td>
                     <td>
                       <div>
                          <label class="uk-text-bold">Orientacyjna wartość</label>
                          <input class="uk-input" type="number" min="0" step="1" placeholder="Orientacyjna wartość"
-                                   th:field="*{price}">
-<!--                                   th:errorclass="uk-form-danger">-->
-<!--                         <span th:if="${#fields.hasErrors('price')}" class="uk-text-small uk-text-danger">-->
-<!--                Musisz podać orientacyjną wartość artefaktu!-->
-<!--            </span>-->
+                                   th:field="*{price}"
+                                   th:errorclass="uk-form-danger">
+                         <span th:if="${#fields.hasErrors('price')}" class="uk-text-small uk-text-danger">
+                Musisz podać orientacyjną wartość artefaktu!
+            </span>
                      </div>
                     </td>
                 </tr>
