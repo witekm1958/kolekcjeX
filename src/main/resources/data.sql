@@ -8,27 +8,3 @@ VALUES ('admin', 'admin', 'admin', 'admin@wp.pl', '2022-12-07 01:35:14.26');
 INSERT INTO public.user_roles (id_user, id_role) VALUES (1, 1);
 INSERT INTO public.user_roles (id_user, id_role) VALUES (1, 2);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
