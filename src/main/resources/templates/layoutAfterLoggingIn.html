@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:fragment="template(content)">
+<head>
+    <meta charset="UTF-8">
+    <title>Kolekcja militariów</title>
+
+    <link rel="stylesheet" th:href="@{/css/uikit.min.css}">
+    <link rel="stylesheet" th:href="@{/fontawesome.min.css}">
+
+    <script th:src="@{/js/uikit.min.js}"></script>
+    <script th:src="@{/js/uikit-icons.min.js}"></script>
+    <script th:src="@{/js/fontawesome.min.js}"></script>
+</head>
+<body>
+
+<div class="uk-container uk-container-large">
+    <nav th:replace="~{navigationAfterLoggingIn :: nav}"></nav>
+
+    <div th:replace="${content}"></div>
+</div>
+
+</body>
+</html>

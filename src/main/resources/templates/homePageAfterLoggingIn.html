@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="~{layout :: template(~{:: .uk-section})}">
-<!--<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="~{layout :: template(~{:: .uk-section})}">-->
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="~{layoutAfterLoggingIn :: template(~{:: .uk-section})}">
 <head>
 
 </head>
@@ -28,7 +27,6 @@
                 podejmowały prywatne zakłady wyrobów metalowych, nie mające odpowiednich tradycji i przygotowania w tej
                 dziedzinie. Zwłaszcza te ostatnie stanowią dziś dużą atrakcję kolekcjonerską. Ze względu na swoją
                 prostotę i niedoskonałość zachowało się ich bardzo niewiele. Warto ocalić to od zapomnienia.</p>
-            <a class="uk-button uk-button-primary uk-margin-large" th:href="@{/register}">Utwórz konto</a>
         </article>
         <div class="uk-cover-container uk-height-max-large uk-margin-bottom">
             <img th:src="@{/img/home2.png}" alt="">

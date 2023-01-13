@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
@@ -9,11 +10,14 @@
 <nav th:fragment="nav" class="uk-navbar-container uk-navbar-transparent" uk-navbar>
     <div class="uk-navbar-left">
         <ul class="uk-navbar-nav">
-<!--            <a th:href="@{/}" class="uk-logo uk-navbar-item"><i class="fa-solid fa-pizza-slice"></i>Pizza</a>-->
+            <!--            <a th:href="@{/}" class="uk-logo uk-navbar-item"><i class="fa-solid fa-pizza-slice"></i>Pizza</a>-->
             <a th:href="@{/}" class="uk-logo uk-navbar-item"><img th:src="@{/img/logo.png}" alt=""></a>
             <li><a th:href="@{/permanent_exhibition}">Ekspozycja stała</a></li>
-            <li><a th:href="@{/ocasional_exhibition}">Wystawa</a></li>
+            <!--            <li><a th:href="@{/ocasional_exhibition}">Wystawa</a></li>-->
+            <!--            <li><a sec:authorize="hasAuthority('USER')" th:href="@{/user_panel}">Panel użytkownika</a></li>-->
+            <!--            <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin_panel}">Panel administratora</a></li>-->
             <li><a th:href="@{/login}">Zaloguj się</a></li>
+            <!--            <li><a th:href="@{/logout}">Wyloguj się</a></li>-->
         </ul>
     </div>
 </nav>
